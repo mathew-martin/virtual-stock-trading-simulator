@@ -151,11 +151,13 @@ async function fetchQuoteWithCache(symbol) {
  */
 async function getFromCache(symbol) {
     try {
+        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+
         const params = {
             TableName: CACHE_TABLE,
             Key: {
                 symbol: symbol,
-                dataType: 'quote'
+                date: today
             }
         };
 
@@ -180,12 +182,13 @@ async function getFromCache(symbol) {
 async function saveToCache(symbol, data) {
     try {
         const now = Math.floor(Date.now() / 1000);
+        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
 
         const params = {
             TableName: CACHE_TABLE,
             Item: {
                 symbol: symbol,
-                dataType: 'quote',
+                date: today,
                 data: data,
                 ttl: now + CACHE_TTL,
                 timestamp: now,
