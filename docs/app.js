@@ -3,13 +3,13 @@
 // -----------------------------------------------------------
 
 // API Gateway invoke URL (with stage)
-const API_BASE = "https://qgc6b15bmb.execute-api.us-east-1.amazonaws.com/dev";
+const API_BASE = "https://gqc6b15bmb.execute-api.us-east-1.amazonaws.com/dev";
 
 // Cognito Hosted UI domain
-const COGNITO_DOMAIN = "https://us-east-1.iheemvgm.auth.us-east-1.amazoncognito.com";
+const COGNITO_DOMAIN = "https://us-east-1hieemjvgm.auth.us-east-1.amazoncognito.com";
 
 // Cognito App Client ID
-const CLIENT_ID = "1oud3dqhoy7gk7man25fmcip";
+const CLIENT_ID = "1oud3daqhov7gkfman25fimcip";
 
 // Your GitHub Pages redirect URL
 const REDIRECT_URI = "https://mathew-martin.github.io/virtual-stock-trading-simulator/";
