@@ -1,287 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <title>Virtual Stock Trading Simulator</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main class="app">
-      <section class="view auth-view" data-view="auth">
-        <div class="auth-card">
-          <div class="auth-copy">
-            <p class="eyebrow">Virtual Stock Trading Simulator</p>
-            <h1>Sign in to your trading desk</h1>
-            <p>
-              Practice risk-free trading, review performance analytics, and keep up
-              with curated news — all within a single, fast dashboard.
-            </p>
-          </div>
-          <form id="authForm" class="auth-form">
-            <label>
-              Email
-              <input
-                type="email"
-                name="email"
-                placeholder="trader@example.com"
-                required
-              />
-            </label>
-            <label>
-              Password
-              <input
-                type="password"
-                name="password"
-                placeholder="••••••••"
-                minlength="6"
-                required
-              />
-            </label>
-            <label class="checkbox">
-              <input type="checkbox" name="remember" />
-              Keep me signed in on this device
-            </label>
-            <button class="btn primary" type="submit">Sign in</button>
-            <p class="form-status" data-auth-status>
-              Enter your credentials to continue.
-            </p>
-          </form>
-        </div>
-        <ul class="auth-benefits">
-          <li>Paper trade with real-time-like quotes.</li>
-          <li>Track portfolio growth and daily P&amp;L.</li>
-          <li>Scan analytics, news, and sentiment signals.</li>
-        </ul>
-      </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Stock Trading Simulator</title>
 
-      <section class="view app-view hidden" data-view="app">
-        <header class="topbar">
-          <h1>Trading Workspace</h1>
-          <div class="topbar__user">
-            <span data-user-email></span>
-            <button type="button" class="btn ghost" data-logout>Log out</button>
-          </div>
-        </header>
-        <div class="workspace">
-          <nav class="sidebar">
-            <button class="sidebar__link active" data-route="dashboard">
-              Dashboard
-            </button>
-            <button class="sidebar__link" data-route="orders">Orders</button>
-            <button class="sidebar__link" data-route="portfolio">
-              Portfolio
-            </button>
-            <button class="sidebar__link" data-route="analytics">
-              Analytics
-            </button>
-            <button class="sidebar__link" data-route="news">News</button>
-            <button class="sidebar__link" data-route="feedback">
-              Feedback
-            </button>
-          </nav>
-          <div class="pages">
-            <section class="page active" data-page="dashboard">
-              <header class="page__head">
-                <div>
-                  <h2>Overview</h2>
-                  <p>Monitor balances and market watch at a glance.</p>
-                </div>
-              </header>
-              <div class="metrics">
-                <article>
-                  <p class="eyebrow">Cash on hand</p>
-                  <h3 data-balance>$0.00</h3>
-                  <p>Instantly available for the next trade.</p>
-                </article>
-                <article>
-                  <p class="eyebrow">Portfolio value</p>
-                  <h3 data-portfolio>$0.00</h3>
-                  <p>Holdings + cash, based on latest quotes.</p>
-                </article>
-                <article>
-                  <p class="eyebrow">Day P&amp;L</p>
-                  <h3 data-pl>+0.00%</h3>
-                  <p>Change relative to yesterday&apos;s close.</p>
-                </article>
-                <article>
-                  <p class="eyebrow">Signals</p>
-                  <h3 data-signals>0 alerts</h3>
-                  <p>Heads-up notifications and strategy cues.</p>
-                </article>
-              </div>
-              <div class="grid">
-                <article class="card">
-                  <h3>Market watch</h3>
-                  <p class="muted">Auto-refreshing prices.</p>
-                  <ul class="watch-list" data-watchlist></ul>
-                  <div class="inline-hint">
-                    Quotes refresh every 30 seconds with cached fallbacks.
-                  </div>
-                </article>
-                <article class="card">
-                  <h3>Recent activity</h3>
-                  <p class="muted">Simulated executions &amp; alerts.</p>
-                  <ul class="list">
-                    <li>MSFT limit order filled · +15 shares</li>
-                    <li>AAPL stop-loss armed at $170.00</li>
-                    <li>Portfolio rebalance suggestion available</li>
-                  </ul>
-                </article>
-              </div>
-            </section>
+  <link rel="stylesheet" href="styles.css" />
 
-            <section class="page" data-page="orders">
-              <header class="page__head">
-                <div>
-                  <h2>Orders</h2>
-                  <p>Submit new market, limit, stop-loss, or GTT orders.</p>
-                </div>
-              </header>
-              <form id="orderForm" class="card">
-                <div class="two-column">
-                  <label>
-                    Symbol
-                    <input
-                      type="text"
-                      name="symbol"
-                      placeholder="AAPL"
-                      maxlength="5"
-                      required
-                    />
-                  </label>
-                  <label>
-                    Quantity
-                    <input
-                      type="number"
-                      name="quantity"
-                      min="1"
-                      max="1000"
-                      required
-                    />
-                  </label>
-                </div>
-                <div class="two-column">
-                  <label>
-                    Order type
-                    <select name="orderType" required>
-                      <option value="market">Market</option>
-                      <option value="limit">Limit</option>
-                      <option value="stopLoss">Stop-Loss</option>
-                      <option value="gtt">Good-til-triggered</option>
-                    </select>
-                  </label>
-                  <label>
-                    Trigger price (optional)
-                    <input type="number" step="0.01" name="trigger" />
-                  </label>
-                </div>
-                <button class="btn primary" type="submit">Submit order</button>
-                <p class="form-status" data-order-status>
-                  Orders are queued and confirmed asynchronously.
-                </p>
-              </form>
-            </section>
+  <!-- Cognito SDK (optional) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/amazon-cognito-identity-js/6.2.0/amazon-cognito-identity.min.js"></script>
 
-            <section class="page" data-page="portfolio">
-              <header class="page__head">
-                <div>
-                  <h2>Portfolio</h2>
-                  <p>Positions, average cost, and current market value.</p>
-                </div>
-              </header>
-              <div class="table-container">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Symbol</th>
-                      <th>Shares</th>
-                      <th>Avg price</th>
-                      <th>Stop-loss</th>
-                      <th>Market value</th>
-                    </tr>
-                  </thead>
-                  <tbody data-holdings></tbody>
-                </table>
-              </div>
-            </section>
+</head>
 
-            <section class="page" data-page="analytics">
-              <header class="page__head">
-                <div>
-                  <h2>Analytics</h2>
-                  <p>Compare weekly ROI against a benchmark.</p>
-                </div>
-              </header>
-              <div class="split analytics-layout">
-                <article class="card analytics-chart">
-                  <h3>Performance trend</h3>
-                  <canvas
-                    id="performanceChart"
-                    aria-label="Performance chart"
-                  ></canvas>
-                </article>
-                <article class="card">
-                  <h3>Insights</h3>
-                  <ul class="list" data-insights></ul>
-                  <div class="inline-hint">
-                    These points are regenerated whenever fresh analytics arrive.
-                  </div>
-                </article>
-              </div>
-            </section>
+<body>
 
-            <section class="page" data-page="news">
-              <header class="page__head">
-                <div>
-                  <h2>News &amp; sentiment</h2>
-                  <p>Story summaries tailored to your watchlist.</p>
-                </div>
-                <button class="btn ghost" data-refresh-news>Refresh feed</button>
-              </header>
-              <div class="news-grid" data-news></div>
-            </section>
+  <!-- AUTH VIEW -->
+  <div class="view" data-view="auth">
+    <div class="auth-container">
+      <h1>Welcome</h1>
+      <p>Please sign in to continue.</p>
 
-            <section class="page" data-page="feedback">
-              <header class="page__head">
-                <div>
-                  <h2>Feedback</h2>
-                  <p>Share feature ideas, bug reports, or sentiment notes.</p>
-                </div>
-              </header>
-              <form id="feedbackForm" class="card">
-                <label>
-                  Topic
-                  <select name="topic" required>
-                    <option value="">Choose a topic</option>
-                    <option value="feature">Feature request</option>
-                    <option value="bug">Bug report</option>
-                    <option value="sentiment">Market sentiment</option>
-                  </select>
-                </label>
-                <label>
-                  Message
-                  <textarea
-                    name="message"
-                    rows="4"
-                    placeholder="Share your thoughts…"
-                    required
-                  ></textarea>
-                </label>
-                <button class="btn primary" type="submit">Send message</button>
-                <p class="form-status" data-feedback-status>
-                  Messages are stored for the operations team to review.
-                </p>
-              </form>
-            </section>
-          </div>
-        </div>
+      <button id="cognitoLoginBtn" class="btn primary">Sign In with Cognito</button>
+    </div>
+  </div>
+
+  <!-- APP VIEW -->
+  <div class="view hidden" data-view="app">
+    <header class="app-header">
+      <h2>📈 Virtual Stock Trading Simulator</h2>
+      <button class="btn logout" data-logout>Logout</button>
+    </header>
+
+    <main class="app-main">
+      <section>
+        <h3>Test Stock Fetch</h3>
+        <button id="testFetchBtn" class="btn">Fetch AAPL Quote</button>
+        <pre id="outputBox" class="output"></pre>
       </section>
     </main>
+  </div>
 
-    <script type="module" src="app.js"></script>
-  </body>
+  <script src="app.js"></script>
+</body>
 </html>
