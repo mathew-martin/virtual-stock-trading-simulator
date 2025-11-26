@@ -41,7 +41,8 @@ const state = {
 const stockCache = new Map();
 const newsCache = { items: [], timestamp: 0 };
 const latestQuotes = {};
-const CACHE_TTL = 45_000;
+// Keep quotes fresh; re-hit API after 15s
+const CACHE_TTL = 15_000;
 
 const selectors = {
   holdingsBody: document.querySelector("[data-holdings]"),
@@ -359,7 +360,7 @@ function setActiveRoute(route) {
   }
 
   clearInterval(state.intervalId);
-  state.intervalId = setInterval(refreshWatchlist, 30_000);
+  state.intervalId = setInterval(refreshWatchlist, 10_000);
 }
 
 function leaveApp() {
@@ -392,7 +393,7 @@ function enterApp(email) {
   }
 
   clearInterval(state.intervalId);
-  state.intervalId = setInterval(refreshWatchlist, 30_000);
+  state.intervalId = setInterval(refreshWatchlist, 10_000);
 }
 
 function handleAuth(event) {

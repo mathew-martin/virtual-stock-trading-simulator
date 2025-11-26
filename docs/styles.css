@@ -226,6 +226,19 @@ textarea {
   gap: 1rem;
 }
 
+.card canvas {
+  width: 100%;
+  max-width: 100%;
+  height: 280px;
+  display: block;
+}
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .card {
   border: 1px solid var(--border);
   border-radius: 1.25rem;
@@ -296,6 +309,10 @@ textarea {
 }
 
 .table-container {
+  overflow-x: auto;
+}
+
+.table {
   overflow-x: auto;
 }
 
